@@ -1,0 +1,54 @@
+Overview:
+
+This solution creates an environment for migrating data between MySQL and PostgreSQL databases using Docker and nmig
+
+Files:
+
+Dockerfile - builds an environment for running the nmig migration tool
+setup_environment.py - sets up MySQL and PostgreSQL containers and creates a database structure
+generate_data.py - generates data for the MySQL database
+migrate.py - initiates the migration and verifies it
+config.json - a configuration file for nmig, specifies connection details
+
+Setup:
+
+1. Build docker image
+
+In the root directory, run: docker build -t nmig_image .
+
+2. Set up environment
+
+To execute the script, run: python setup_environment.py
+
+3. Generate data
+
+To generate the data in the MySQL database, run: python generate_data.py
+
+4. Perform migration
+
+To execute migrate.py, run: python migrate.py
+
+5. Verify migration
+
+migrate.py verifies the record counts in both databases automatically and prints any errors
+
+Assumptions:
+
+1. Docker is installed and configured
+2. The host IP 172.17.0.1 is accessible to both databases
+3. Each script is run in the order above
+
+Variables:
+
+MYSQL_USER, MYSQL_ROOT_PASSWORD - credentials for MySQL
+POSTGRES_USER, POSTGRES_PASSWORD - credentials for PostgreSQL
+MYSQL_DB, POSTGRES_DB - names of databases
+
+Software used:
+
+-psycopg2-binary (https://www.psycopg.org/docs/)
+-nmig (https://github.com/AnatolyUss/nmig)
+-Docker (https://docs.docker.com/)
+-mysql.connector (https://dev.mysql.com/doc/connector-python/en/)
+-faker (https://faker.readthedocs.io/en/stable/)
+-python 'time' module (https://docs.python.org/3/library/time.html)
